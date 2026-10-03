@@ -1,0 +1,126 @@
+{{- define "main" }}
+
+{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
+{{- $pages = sort $pages "Date" "desc" }}
+
+<section class="home-hero">
+  <h1>{{ site.Title }}</h1>
+  {{- with site.Params.hero }}
+  <p class="hero-sub">{{ .subtitle }}</p>
+  <p class="hero-tagline">{{ .tagline }}</p>
+  <hr class="hero-rule">
+  <p class="hero-epigraph">{{ .epigraph }}</p>
+  {{- end }}
+</section>
+
+{{- $pinned := where $pages "Params.pinned" true }}
+{{- if $pinned }}
+<section class="block">
+  <h2 class="block-title">Pinned <span class="tag">置顶</span></h2>
+  <ul class="mini-list">
+    {{- range $pinned }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+
+<div class="block-cols">
+  <section class="block-card">
+    <h2 class="block-title">Daily Picks <span class="tag">{{ now.Format "2 Jan" }}</span></h2>
+    {{- if $pages }}
+    <ul class="mini-list">
+      {{- range first 3 $pages }}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{- end }}
+    </ul>
+    {{- else }}
+    <ul class="mini-list">
+      <li>还没有文章。</li>
+    </ul>
+    {{- end }}
+  </section>
+
+  <section class="block-card">
+    <h2 class="block-title">Activity</h2>
+    {{- $counts := dict }}
+    {{- range $pages }}
+    {{- $key := .Date.Format "2006-01-02" }}
+    {{- $counts = merge $counts (dict $key (add (index $counts $key | default 0) 1)) }}
+    {{- end }}
+    {{- $span := 84 }}
+    <div class="heat">
+      {{- range seq 1 $span }}
+      {{- $day := now.AddDate 0 0 (sub $span .) }}
+      {{- $n := index $counts ($day.Format "2006-01-02") | default 0 }}
+      <span class="cell{{ if gt $n 0 }} on{{ end }}" title="{{ $day.Format "2006/01/02" }}"></span>
+      {{- end }}
+    </div>
+    <div class="heat-legend">
+      <span>少</span><i></i><i></i><i class="on"></i><i class="on"></i><span>多</span>
+    </div>
+    <p class="heat-stats">
+      {{ len $pages }} 篇文章
+      {{- with $pages }} · 最近更新 {{ (index . 0).Date.Format "2006/01/02" }}{{ end }}
+    </p>
+  </section>
+</div>
+
+<div class="sort-bar" id="sort-bar">
+  <span>排序：</span>
+  <button type="button" data-sort="date" data-dir="desc" aria-pressed="true">创建时间 ↓</button>
+  <button type="button" data-sort="mod" data-dir="desc" aria-pressed="false">更新时间 ↓</button>
+  <button type="button" data-sort="title" data-dir="asc" aria-pressed="false">标题 ↑</button>
+</div>
+
+{{- if $pages }}
+<ul class="post-rows" id="post-rows">
+  {{- range first 10 $pages }}
+  <li class="row" data-date="{{ .Date.Unix }}" data-mod="{{ .Lastmod.Unix }}" data-title="{{ .Title }}">
+    <a class="row-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+    <span class="row-date">{{ .Date.Format site.Params.DateFormat }}</span>
+  </li>
+  {{- end }}
+</ul>
+{{- end }}
+
+<p class="view-all"><a href="{{ "archives/" | relURL }}">View all posts →</a></p>
+
+<script>
+(function () {
+  var list = document.getElementById('post-rows');
+  var bar = document.getElementById('sort-bar');
+  if (!list || !bar) return;
+  var rows = Array.prototype.slice.call(list.children);
+
+  bar.addEventListener('click', function (event) {
+    var button = event.target.closest('button');
+    if (!button) return;
+
+    var key = button.dataset.sort;
+    var dir = button.dataset.dir === 'desc' ? 'asc' : 'desc';
+    var arrow = dir === 'asc' ? ' ↑' : ' ↓';
+
+    Array.prototype.forEach.call(bar.querySelectorAll('button'), function (other) {
+      other.setAttribute('aria-pressed', 'false');
+    });
+    button.setAttribute('aria-pressed', 'true');
+    button.textContent = button.textContent.replace(/[↑↓]\s*$/, '') + arrow;
+
+    rows.sort(function (a, b) {
+      if (key === 'title') {
+        return dir === 'asc'
+          ? a.dataset.title.localeCompare(b.dataset.title, 'zh')
+          : b.dataset.title.localeCompare(a.dataset.title, 'zh');
+      }
+      var left = Number(a.dataset[key]);
+      var right = Number(b.dataset[key]);
+      return dir === 'asc' ? left - right : right - left;
+    });
+    rows.forEach(function (row) { list.appendChild(row); });
+  });
+})();
+</script>
+
+{{- end }}

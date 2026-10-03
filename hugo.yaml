@@ -1,6 +1,5 @@
 # ============ 站点基本信息 ============
-# 换域名后，把下面这行改成新地址（结尾要带斜杠）
-baseURL: "https://dry-credit-b851.1330229955.workers.dev/"
+baseURL: "https://yu-harness.github.io/blog/"
 locale: "zh-cn"
 defaultContentLanguage: "zh-cn"
 title: "AI 学习笔记"
@@ -17,37 +16,43 @@ mainSections:
   - agent
   - engineering
 
+# 让搜索能用：首页额外生成一份 index.json，搜索页读它
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
 enableRobotsTXT: true
 enableEmoji: true
 
 params:
   env: production
-  description: "记录大模型与 Agent 应用开发的学习与实践，从原理到落地都会写"
-  # 想让文章页和 RSS 显示作者名，就取消注释并填上你的名字
-  # author: "你的名字"
-  DateFormat: "2006-01-02"
+  description: "大模型与 Agent 应用开发：什么条件下会坏、代价是多少、实测是多少"
+  DateFormat: "2006/01/02"
 
-  # 深浅色跟随系统
-  defaultTheme: auto
+  # 深色打底
+  defaultTheme: dark
 
   # 文章页显示哪些东西
-  ShowReadingTime: true
-  ShowWordCount: true
+  ShowReadingTime: false
+  ShowWordCount: false
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
   ShowToc: true
   TocOpen: false
 
-  # 首页的自我介绍
-  homeInfoParams:
-    Title: "你好 👋"
-    Content: "计算机专业在读硕士，方向是大模型与 Agent 应用开发。这里记录我在 AI 方向的学习笔记与实践总结：从 Transformer、RAG 这些基础，到 Agent 编排、上下文管理、工具边界、成本控制这些真正动手时会卡住的地方。每篇只讲一个具体问题，配上真实代码和数字。"
+  # 首页顶部
+  hero:
+    subtitle: "大模型 · 检索 · Agent"
+    tagline: "什么条件下会坏 · 代价是多少 · 我实测是多少"
+    epigraph: "跑不出来的数字，不写。"
 
   # 侧边和底部的图标，有了账号再取消注释
   # socialIcons:
   #   - name: github
-  #     url: "https://github.com/你的用户名"
+  #     url: "https://github.com/yu-harness"
 
 menu:
   main:
@@ -71,6 +76,10 @@ menu:
       name: 关于
       url: /about/
       weight: 50
+    - identifier: search
+      name: 搜索
+      url: /search/
+      weight: 60
   footer:
     - identifier: tags
       name: 标签
