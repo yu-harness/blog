@@ -1,0 +1,14 @@
+# Hugo 构建产物
+public/
+public.zip
+resources/
+hugo_stats.json
+.hugo_build.lock
+
+# 本地预览的日志
+server.log
+server.err.log
+
+# 系统文件
+.DS_Store
+Thumbs.db

@@ -1,0 +1,82 @@
+# ============ 站点基本信息 ============
+# 换域名后，把下面这行改成新地址（结尾要带斜杠）
+baseURL: "https://dry-credit-b851.1330229955.workers.dev/"
+locale: "zh-cn"
+defaultContentLanguage: "zh-cn"
+title: "AI 学习笔记"
+theme: "PaperMod"
+
+# 每页显示几篇文章
+pagination:
+  pagerSize: 10
+
+# 首页显示哪些栏目的文章（顺序就是显示顺序）
+mainSections:
+  - llm
+  - rag
+  - agent
+  - engineering
+
+enableRobotsTXT: true
+enableEmoji: true
+
+params:
+  env: production
+  description: "记录大模型与 Agent 应用开发的学习与实践，从原理到落地都会写"
+  # 想让文章页和 RSS 显示作者名，就取消注释并填上你的名字
+  # author: "你的名字"
+  DateFormat: "2006-01-02"
+
+  # 深浅色跟随系统
+  defaultTheme: auto
+
+  # 文章页显示哪些东西
+  ShowReadingTime: true
+  ShowWordCount: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowToc: true
+  TocOpen: false
+
+  # 首页的自我介绍
+  homeInfoParams:
+    Title: "你好 👋"
+    Content: "计算机专业在读硕士，方向是大模型与 Agent 应用开发。这里记录我在 AI 方向的学习笔记与实践总结：从 Transformer、RAG 这些基础，到 Agent 编排、上下文管理、工具边界、成本控制这些真正动手时会卡住的地方。每篇只讲一个具体问题，配上真实代码和数字。"
+
+  # 侧边和底部的图标，有了账号再取消注释
+  # socialIcons:
+  #   - name: github
+  #     url: "https://github.com/你的用户名"
+
+menu:
+  main:
+    - identifier: llm
+      name: 原理与边界
+      url: /llm/
+      weight: 10
+    - identifier: rag
+      name: 检索
+      url: /rag/
+      weight: 20
+    - identifier: agent
+      name: Agent
+      url: /agent/
+      weight: 30
+    - identifier: engineering
+      name: 实测与项目
+      url: /engineering/
+      weight: 40
+    - identifier: about
+      name: 关于
+      url: /about/
+      weight: 50
+  footer:
+    - identifier: tags
+      name: 标签
+      url: /tags/
+      weight: 10
+    - identifier: archives
+      name: 归档
+      url: /archives/
+      weight: 20
