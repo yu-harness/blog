@@ -26,6 +26,16 @@ outputs:
 enableRobotsTXT: true
 enableEmoji: true
 
+# 数学公式：让 Hugo 把 $...$ 与 $$...$$ 原样保住，渲染交给 KaTeX
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block: [['$$', '$$'], ['\[', '\]']]
+          inline: [['$', '$'], ['\(', '\)']]
+
 params:
   env: production
   description: "大模型与 Agent 应用开发：什么条件下会坏、代价是多少、实测是多少"
