@@ -1,5 +1,10 @@
-
-# 01 Transformer 与 LLM 基础
+---
+title: "Transformer 与 LLM 基础"
+date: 2026-10-03
+draft: false
+tags: ["Transformer", "上下文窗口", "Agent"]
+summary: "从 token 序列讲到 decoder-only：每一块架构在工程上换来什么，代价落在哪里。"
+---
 
 阅读目标：
 	把为什么是 Transformer、LLM 到底学到了什么、为什么 Decoder-only 成为主流讲清楚，做到既能回答八股，也能把它和工程实践连起来。
@@ -26,7 +31,7 @@ agent开发岗位了解即可，当然时间充裕还是希望大家细品，age
 大语言模型本质上是基于 Transformer 的自回归语言模型，核心任务是根据已有 token 预测下一个 token。Transformer 相比 RNN 更适合大规模并行训练，核心模块包括 embedding、位置编码、self-attention、FFN、残差和归一化。现代生成式产品大多采用 decoder-only，因为 next-token 目标和开放式生成高度一致。LLM 的能力来自**预训练、规模扩展和后训练对齐**，不是单纯因为参数大。它强在通用模式归纳和 in-context learning，但也因为参数里不是显式知识库，所以**会出现幻觉、过时和格式不稳定**，这就是为什么后续需要 prompt engineering、context engineering、RAG 和工具调用。
 
 ## 二、总体看一下这块的思维导图
-![[Pasted image 20260930142653.png]]
+![思维导图](mindmap.png)
 
 从应用工程视角看，LLM 最核心的事情其实只有一句：**给定一个 token 序列，预测下一个最可能出现的 token**。模型并不知道摘要问答SQL 生成Agent 规划这些任务标签，它只是通过训练把大量任务都转写成基于上下文继续生成的统一接口。提示词工程、上下文工程、结构化输出、工具调用，本质上都是在操控这个统一接口。
 
