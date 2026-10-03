@@ -48,6 +48,7 @@ params:
     subtitle: "大模型 · 检索 · Agent"
     tagline: "什么条件下会坏 · 代价是多少 · 我实测是多少"
     epigraph: "跑不出来的数字，不写。"
+    motto: "向着光出发"
 
   # 侧边和底部的图标，有了账号再取消注释
   # socialIcons:

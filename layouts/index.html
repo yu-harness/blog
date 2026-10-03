@@ -11,6 +11,9 @@
   <p class="hero-tagline">{{ .tagline }}</p>
   <hr class="hero-rule">
   <p class="hero-epigraph">{{ .epigraph }}</p>
+  {{- with .motto }}
+  <p class="hero-motto">{{ . }}</p>
+  {{- end }}
   {{- end }}
 </section>
 
