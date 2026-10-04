@@ -48,6 +48,14 @@ params:
   description: "大模型与 Agent 应用开发：什么条件下会坏、代价是多少、实测是多少"
   DateFormat: "2006/01/02"
 
+  # 站点图标与浏览器主题色
+  # 图标文件放在 static/ 下（favicon.ico / favicon-16x16.png / favicon-32x32.png /
+  # apple-touch-icon.png / safari-pinned-tab.svg），路径用 head.html 里的默认值即可，
+  # 这里只覆盖浏览器 UI 的取色，使其与「编辑器冷调」的深色底一致。
+  assets:
+    theme_color: "#0b0e14"
+    msapplication_TileColor: "#0b0e14"
+
   # 深色打底
   defaultTheme: dark
 
