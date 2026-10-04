@@ -36,6 +36,13 @@ markup:
           block: [['$$', '$$'], ['\[', '\]']]
           inline: [['$', '$'], ['\(', '\)']]
 
+  # 代码高亮：使用 class-based（Chroma）
+  # 若不显式设为 false，Hugo 默认输出内联样式（Monokai 深绿底），
+  # 会导致主题自带 chroma 样式与 assets/css/extended/station.css 的冷调配色全部失效。
+  # 改为 class-based 后，由 station.css 提供「编辑器冷调」token 配色。
+  highlight:
+    noClasses: false
+
 params:
   env: production
   description: "大模型与 Agent 应用开发：什么条件下会坏、代价是多少、实测是多少"

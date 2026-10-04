@@ -1,0 +1,41 @@
+# 简体中文界面文案（站点语言为 zh-cn；主题自带的是 zh，不会被 zh-cn 自动回退命中）
+# 放在站点根目录 i18n/ 下即可被 Hugo 读取，文件名需与语言代码一致。
+
+- id: prev_page
+  translation: "上一页"
+
+- id: next_page
+  translation: "下一页"
+
+- id: read_time
+  translation:
+    one: "1 分钟"
+    other: "{{ .Count }} 分钟"
+
+- id: words
+  translation:
+    one: "字"
+    other: "{{ .Count }} 字"
+
+- id: toc
+  translation: "目录"
+
+- id: translations
+  translation: "语言"
+
+- id: home
+  translation: "主页"
+
+- id: edit_post
+  translation: "编辑"
+
+- id: code_copy
+  translation: "复制"
+
+- id: code_copied
+  translation: "已复制！"
+
+# 404 页标题文案。Hugo 内核将 404 标题硬编码为 "404 Page not found" 且无对应 i18n 键，
+# 因此本站通过覆盖 layouts/_partials/head.html 特判 404 页并读取本键（见该文件头部注释）。
+- id: not_found_title
+  translation: "页面未找到"

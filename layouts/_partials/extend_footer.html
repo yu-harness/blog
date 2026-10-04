@@ -1,4 +1,4 @@
-{{- /* 自托管 KaTeX，把 $...$ 与 $$...$$ 渲染成公式 */ -}}
+{{- /* 自托管 KaTeX，把 $...$ 与 $$...$$ 渲染成公式（保持原样，勿删） */ -}}
 <script defer src="{{ "katex/katex.min.js" | relURL }}"></script>
 <script defer src="{{ "katex/auto-render.min.js" | relURL }}"></script>
 <script>
@@ -15,6 +15,72 @@
       ],
       ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code", "option"],
       throwOnError: false
+    });
+  });
+</script>
+
+{{- /* TOC 当前项高亮（scrollspy）：零依赖，IntersectionObserver 实现。
+       仅在存在目录（details.toc）的文章页生效，其余页面自动 no-op。
+       给匹配的目录链接加 .active 类，样式由 station.css 提供。 */ -}}
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    var toc = document.querySelector("details.toc");
+    if (!toc) {
+      return;
+    }
+    var links = Array.prototype.slice.call(
+      toc.querySelectorAll('.inner a[href^="#"]')
+    );
+    if (!links.length || typeof IntersectionObserver !== "function") {
+      return;
+    }
+
+    var map = {};
+    var headings = [];
+    links.forEach(function (link) {
+      var id = decodeURIComponent(link.getAttribute("href").slice(1));
+      var el = document.getElementById(id);
+      if (el) {
+        map[id] = link;
+        headings.push(el);
+      }
+    });
+    if (!headings.length) {
+      return;
+    }
+
+    var current = null;
+
+    function clear() {
+      links.forEach(function (l) {
+        l.classList.remove("active");
+        l.removeAttribute("aria-current");
+      });
+    }
+
+    function activate(link) {
+      if (!link || link === current) {
+        return;
+      }
+      clear();
+      link.classList.add("active");
+      link.setAttribute("aria-current", "true");
+      current = link;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            activate(map[entry.target.id]);
+          }
+        });
+      },
+      { rootMargin: "-10% 0px -80% 0px", threshold: 0 }
+    );
+
+    headings.forEach(function (h) {
+      observer.observe(h);
     });
   });
 </script>
