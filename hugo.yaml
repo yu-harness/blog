@@ -72,8 +72,8 @@ params:
   hero:
     subtitle: "大模型 · 检索 · Agent"
     tagline: "什么条件下会坏 · 代价是多少 · 我实测是多少"
-    epigraph: "跑不出来的数字，不写。"
-    motto: "向着光出发"
+    epigraph: "核心理想：让 21 世纪不再有贫困——金钱退场，资源流动。"
+    motto: "终极目标：带领人类逃离银河系。"
 
   # 侧边和底部的图标，有了账号再取消注释
   # socialIcons:
