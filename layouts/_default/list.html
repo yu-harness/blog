@@ -1,0 +1,41 @@
+{{- define "main" }}
+
+<header class="section-head">
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}
+  <p class="section-desc">{{ . }}</p>
+  {{- end }}
+</header>
+
+{{- $base := .RelPermalink }}
+{{- $subs := .Params.subsections }}
+{{- with $subs }}
+<div class="sub-grid">
+  {{- range . }}
+  {{- $href := .url }}
+  {{- if not (hasPrefix $href "/") }}
+  {{- $href = printf "%s%s" $base $href }}
+  {{- end }}
+  <a class="sub-card" href="{{ relURL $href }}">
+    <h2>{{ .title }}</h2>
+    {{- with .desc }}<p>{{ . }}</p>{{ end }}
+  </a>
+  {{- end }}
+</div>
+{{- end }}
+
+{{- $pages := .RegularPagesRecursive }}
+{{- if $pages }}
+<ul class="post-rows">
+  {{- range sort $pages "Date" "desc" }}
+  <li class="row">
+    <a class="row-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+    <span class="row-date">{{ .Date.Format site.Params.DateFormat }}</span>
+  </li>
+  {{- end }}
+</ul>
+{{- else }}
+<p class="empty-note">写作中——第一篇正在路上。</p>
+{{- end }}
+
+{{- end }}

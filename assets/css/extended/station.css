@@ -1654,3 +1654,99 @@ details.toc .inner a.active {
         backdrop-filter: none;
     }
 }
+
+/* ============================================================
+   11. 栏目页（子板块卡片 + 空态）
+   ============================================================ */
+
+.section-head {
+    margin-bottom: 10px;
+}
+
+.section-head h1 {
+    font-size: 1.72rem;
+    margin-bottom: 10px;
+}
+
+.section-desc {
+    max-width: 620px;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--secondary);
+}
+
+.sub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 14px;
+    margin: 22px 0 30px;
+}
+
+.sub-card {
+    display: block;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--entry);
+    transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.sub-card:hover {
+    border-color: var(--accent-line);
+    transform: translateY(-2px);
+}
+
+.sub-card h2 {
+    position: relative;
+    padding-left: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.sub-card h2::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 2px;
+    background: var(--accent);
+    opacity: .5;
+    transform: translateY(-50%);
+    transition: opacity var(--dur) var(--ease);
+}
+
+.sub-card:hover h2::before {
+    opacity: 1;
+}
+
+.sub-card p {
+    margin: 8px 0 0;
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: var(--secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.empty-note {
+    margin: 40px 0;
+    padding: 18px;
+    border: 1px dashed var(--tertiary);
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--secondary);
+}
+
+@media (max-width: 640px) {
+    .sub-grid {
+        grid-template-columns: 1fr;
+    }
+}

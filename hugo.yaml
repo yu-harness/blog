@@ -2,7 +2,7 @@
 baseURL: "https://yu-harness.github.io/blog/"
 locale: "zh-cn"
 defaultContentLanguage: "zh-cn"
-title: "AI 学习笔记"
+title: "赵宇 · 大模型工程师"
 theme: "PaperMod"
 
 # 每页显示几篇文章
@@ -12,9 +12,8 @@ pagination:
 # 首页显示哪些栏目的文章（顺序就是显示顺序）
 mainSections:
   - llm
-  - rag
-  - agent
-  - engineering
+  - tools
+  - notes
 
 # 让搜索能用：首页额外生成一份 index.json，搜索页读它
 outputs:
@@ -45,7 +44,7 @@ markup:
 
 params:
   env: production
-  description: "大模型与 Agent 应用开发：什么条件下会坏、代价是多少、实测是多少"
+  description: "赵宇的大模型工程笔记：LLM 原理与边界、RAG、Agent 与工具链，每篇都有实测数字。"
   DateFormat: "2006/01/02"
 
   # 站点图标与浏览器主题色
@@ -70,7 +69,7 @@ params:
 
   # 首页顶部
   hero:
-    subtitle: "大模型 · 检索 · Agent"
+    subtitle: "大模型工程师 ｜ LLM · RAG · Agent"
     tagline: "什么条件下会坏 · 代价是多少 · 我实测是多少"
     epigraph: "核心理想：让 21 世纪不再有贫困——金钱退场，资源流动。"
     motto: "终极目标：带领人类逃离银河系。"
@@ -83,29 +82,25 @@ params:
 menu:
   main:
     - identifier: llm
-      name: 原理与边界
+      name: 大模型
       url: /llm/
       weight: 10
-    - identifier: rag
-      name: 检索
-      url: /rag/
+    - identifier: tools
+      name: 工具链
+      url: /tools/
       weight: 20
-    - identifier: agent
-      name: Agent
-      url: /agent/
+    - identifier: notes
+      name: 观点与笔记
+      url: /notes/
       weight: 30
-    - identifier: engineering
-      name: 实测与项目
-      url: /engineering/
-      weight: 40
     - identifier: about
       name: 关于
       url: /about/
-      weight: 50
+      weight: 40
     - identifier: search
       name: 搜索
       url: /search/
-      weight: 60
+      weight: 50
   footer:
     - identifier: tags
       name: 标签
