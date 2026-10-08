@@ -5,10 +5,9 @@
 {{- $pages = sort $pages "Date" "desc" }}
 
 <section class="home-hero">
-  <h1>{{ site.Title }}</h1>
+  <h1>{{ replace site.Title "·" `<span class="hero-dot">·</span>` | safeHTML }}</h1>
   {{- with site.Params.hero }}
   <p class="hero-sub">{{ .subtitle }}</p>
-  <p class="hero-tagline">{{ .tagline }}</p>
   <hr class="hero-rule">
   <p class="hero-epigraph">{{ .epigraph }}</p>
   {{- with .motto }}

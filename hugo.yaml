@@ -69,8 +69,7 @@ params:
 
   # 首页顶部
   hero:
-    subtitle: "大模型工程师 ｜ LLM · RAG · Agent"
-    tagline: "什么条件下会坏 · 代价是多少 · 我实测是多少"
+    subtitle: "LLM · RAG · AGENT · INFERENCE"
     epigraph: "核心理想：让 21 世纪不再有贫困——金钱退场，资源流动。"
     motto: "终极目标：带领人类逃离银河系。"
 

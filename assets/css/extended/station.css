@@ -300,7 +300,7 @@ a {
 
 .home-hero {
     position: relative;
-    padding: 92px 0 46px;
+    padding: 112px 0 52px;
     text-align: center;
     overflow: hidden;
 }
@@ -323,49 +323,48 @@ a {
 
 .home-hero h1 {
     margin: 0;
-    font-size: clamp(36px, 6vw, 60px);
+    font-size: clamp(42px, 7.2vw, 80px);
     font-weight: 800;
-    line-height: 1.06;
+    line-height: 1.04;
     letter-spacing: -.035em;
     color: var(--primary);
 }
 
-.home-hero .hero-sub {
-    margin: 18px 0 0;
-    font-family: var(--font-mono);
-    font-size: 12.5px;
-    letter-spacing: .08em;
-    color: var(--secondary);
+.home-hero .hero-dot {
+    color: var(--accent);
+    font-weight: 400;
+    margin: 0 .06em;
 }
 
-.home-hero .hero-tagline {
-    margin: 52px 0 0;
-    font-size: 14px;
-    letter-spacing: .02em;
+.home-hero .hero-sub {
+    margin: 24px 0 0;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    letter-spacing: .16em;
     color: var(--secondary);
 }
 
 .home-hero .hero-rule {
-    width: 44px;
+    width: 52px;
     height: 1px;
-    margin: 22px auto;
+    margin: 30px auto;
     border: 0;
-    background: var(--tertiary);
+    background: linear-gradient(90deg, transparent, var(--accent-line), transparent);
 }
 
 .home-hero .hero-epigraph {
     margin: 0;
     font-family: var(--font-mono);
-    font-size: 12.5px;
+    font-size: 13.5px;
     font-style: italic;
     letter-spacing: .01em;
     color: var(--secondary);
 }
 
 .home-hero .hero-motto {
-    margin: 14px 0 0;
+    margin: 16px 0 0;
     font-family: var(--font-mono);
-    font-size: 12.5px;
+    font-size: 13.5px;
     font-style: italic;
     color: var(--accent);
 }
@@ -1591,7 +1590,7 @@ details.toc .inner a.active {
     }
 
     .home-hero h1 {
-        font-size: clamp(30px, 9vw, 40px);
+        font-size: clamp(34px, 9.5vw, 48px);
     }
 
     .home-hero .hero-tagline {
