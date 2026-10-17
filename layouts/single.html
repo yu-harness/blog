@@ -1,0 +1,96 @@
+{{- define "main" }}
+
+{{- /* 数字花园单页布局：左侧本模块知识树（sticky）+ 正文 + 底部反向链接。
+       基于 PaperMod 的 single.html 扩充，保留面包屑 / 封面 / TOC / 上下篇等原有能力。 */ -}}
+<div class="garden">
+  {{- $sec := .FirstSection }}
+  {{- if and $sec (ne $sec.RelPermalink "/") }}
+  <aside class="garden-side" aria-label="本模块导航">
+    <div class="garden-side-inner">
+      <a class="garden-side-root" href="{{ $sec.RelPermalink }}">{{ $sec.Title }}</a>
+
+      {{- $top := sort $sec.RegularPages "Params.series_order" "Title" }}
+      {{- with $top }}
+      <ul class="garden-list">
+        {{- range . }}
+        {{- partial "garden-leaf.html" (dict "ctx" . "current" $) }}
+        {{- end }}
+      </ul>
+      {{- end }}
+
+      {{- range $sec.Sections.ByTitle }}
+      <details class="garden-group" open>
+        <summary>{{ .Title }}</summary>
+        <ul class="garden-list">
+          {{- range sort .RegularPagesRecursive "Params.series_order" "Title" }}
+          {{- partial "garden-leaf.html" (dict "ctx" . "current" $) }}
+          {{- end }}
+        </ul>
+      </details>
+      {{- end }}
+    </div>
+  </aside>
+  {{- end }}
+
+  <article class="post-single garden-main">
+    <header class="post-header">
+      {{ partial "breadcrumbs.html" . }}
+      <h1 class="post-title entry-hint-parent">
+        {{ .Title }}
+        {{- if .Draft }}
+        <span class="entry-hint" title="Draft">草稿</span>
+        {{- end }}
+      </h1>
+      {{- if .Description }}
+      <div class="post-description">{{ .Description }}</div>
+      {{- end }}
+
+      <div class="grow-bar">
+        {{- with .Params.maturity }}
+        <span class="maturity m-{{ . }}" title="笔记生长状态">{{ partial "maturity.html" . }}</span>
+        {{- end }}
+        {{- with .Params.series }}
+        <span class="chip">系列 · {{ . }}</span>
+        {{- end }}
+        {{- with .Params.lastReviewed }}
+        <span class="chip">最近修订 {{ dateFormat "2006/01/02" . }}</span>
+        {{- end }}
+      </div>
+
+      {{- if not (.Param "hideMeta") }}
+      <div class="post-meta">
+        {{- partial "post_meta.html" . -}}
+        {{- partial "post_canonical.html" . -}}
+      </div>
+      {{- end }}
+    </header>
+
+    {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
+    {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}
+    {{- if (.Param "ShowToc") }}{{ partial "toc.html" . }}{{ end }}
+
+    {{- if .Content }}
+    <div class="post-content md-content">
+      {{- if not (.Param "disableAnchoredHeadings") }}
+      {{- partial "anchored_headings.html" .Content -}}
+      {{- else }}{{ .Content }}{{ end }}
+    </div>
+    {{- end }}
+
+    {{- partial "extend_post_content.html" . }}
+
+    <footer class="post-footer">
+      {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
+      <ul class="post-tags">
+        {{- range ($.GetTerms $tags) }}
+        <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+        {{- end }}
+      </ul>
+      {{- if (.Param "ShowPostNavLinks") }}{{ partial "post_nav_links.html" . }}{{ end }}
+    </footer>
+
+    {{ partial "backlinks.html" . }}
+  </article>
+</div>
+
+{{- end }}{{/* end main */}}

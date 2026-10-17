@@ -1,0 +1,20 @@
+---
+title: "Agent 架构"
+description: "Agent 是怎么被搭建出来的：执行模式、工具调用、MCP 协议、多智能体编排，以及把这些串起来的 Harness 运行时。每篇写清它在什么条件下失效。"
+subsections:
+  - title: "Harness 与运行时"
+    url: "harness/"
+    desc: "入口解析 → 上下文构建 → 控制循环 → 执行网关 → 持久化审计，五层怎么分。"
+  - title: "执行模式"
+    url: "patterns/"
+    desc: "ReAct、Plan-and-Execute、Reflection：循环结构与适用任务。"
+  - title: "工具调用"
+    url: "tool-calling/"
+    desc: "Function Calling、Tool Schema、权限边界与失败重试。"
+  - title: "MCP 协议"
+    url: "mcp/"
+    desc: "协议结构、Server 实现，以及和 REST / GraphQL / gRPC 的对比。"
+  - title: "多智能体编排"
+    url: "multi-agent/"
+    desc: "角色路由、任务认领、冲突控制与状态聚合。"
+---

@@ -1,0 +1,27 @@
+{{- /* 反向链接（Digital Garden 的核心导航之一）
+       构建期遍历全站正文 HTML，找出引用了当前页面的文章。
+       站点规模在几百篇以内时 O(n²) 完全可接受，无需任何 JS。 */ -}}
+{{- $current := .RelPermalink -}}
+{{- $found := slice -}}
+{{- range site.RegularPages -}}
+  {{- if eq .RelPermalink $current }}{{ continue }}{{ end -}}
+  {{- if strings.Contains .Content (printf "href=%q" $current) -}}
+    {{- $found = $found | append . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with $found }}
+<nav class="backlinks" aria-label="引用了本文的笔记">
+  <h2 class="backlinks-title">被引用 · {{ len $found }} 篇</h2>
+  <ul class="backlinks-list">
+    {{- range $found }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{- with .Params.maturity }}
+      <span class="maturity m-{{ . }}">{{ partial "maturity.html" . }}</span>
+      {{- end }}
+    </li>
+    {{- end }}
+  </ul>
+</nav>
+{{- end }}

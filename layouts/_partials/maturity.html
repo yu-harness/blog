@@ -1,0 +1,4 @@
+{{- /* 成熟度徽标：把 maturity 字段映射成本地化标签。
+       用法：partial "maturity.html" "seed" */ -}}
+{{- $m := . | default "seed" -}}
+{{- if eq $m "seed" }}🌱 种子{{ else if eq $m "budding" }}🌿 生长{{ else if eq $m "evergreen" }}🌳 常青{{ else }}🌱 种子{{ end }}

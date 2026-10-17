@@ -1,13 +1,17 @@
 {{- define "main" }}
 
-{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- /* 数字花园首页：品牌 Hero → 知识分区入口 → 最近生长 / 生长轨迹 → 精选项目
+       刻意去掉「按发布时间倒序」的文章流水账，改为按知识模块 + 生长状态组织。 */ -}}
+{{- $pages := where site.RegularPages "Draft" false }}
 {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
-{{- $pages = sort $pages "Date" "desc" }}
+{{- /* 只统计七大分区里的笔记，排除 about / archives / search 这类独立页面 */ -}}
+{{- $pages = where $pages "Section" "in" site.Params.mainSections }}
 
 <section class="home-hero">
   <h1>{{ replace site.Title "·" `<span class="hero-dot">·</span>` | safeHTML }}</h1>
   {{- with site.Params.hero }}
   <p class="hero-sub">{{ .subtitle }}</p>
+  {{- with .tagline }}<p class="hero-tagline">{{ . }}</p>{{ end }}
   <hr class="hero-rule">
   <p class="hero-epigraph">{{ .epigraph }}</p>
   {{- with .motto }}
@@ -16,36 +20,45 @@
   {{- end }}
 </section>
 
-{{- $pinned := where $pages "Params.pinned" true }}
-{{- if $pinned }}
+{{- with site.Params.garden_modules }}
 <section class="block">
-  <h2 class="block-title">Pinned <span class="tag">置顶</span></h2>
-  <ul class="mini-list">
-    {{- range $pinned }}
-    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  <h2 class="block-title">Garden Map <span class="tag">知识分区</span></h2>
+  <div class="sub-grid zone-grid">
+    {{- range . }}
+    <a class="sub-card zone-card" href="{{ .url | relURL }}">
+      {{- with .glyph }}<span class="zone-glyph">{{ . }}</span>{{ end }}
+      <h2>{{ .title }}</h2>
+      {{- with .desc }}<p>{{ . }}</p>{{ end }}
+    </a>
     {{- end }}
-  </ul>
+  </div>
 </section>
 {{- end }}
 
 <div class="block-cols">
   <section class="block-card">
-    <h2 class="block-title">Daily Picks <span class="tag">{{ now.Format "2 Jan" }}</span></h2>
-    {{- if $pages }}
-    <ul class="mini-list">
-      {{- range first 3 $pages }}
-      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    <h2 class="block-title">🌱 最近生长 <span class="tag">按最近修订</span></h2>
+    <ul class="mini-list grow-list">
+      {{- $grown := sort $pages "Params.lastReviewed" "desc" }}
+      {{- $grown = first 6 $grown }}
+      {{- range $grown }}
+      <li class="grow-item">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <span class="grow-meta">
+          {{- with .Params.maturity }}
+          <span class="maturity m-{{ . }}">{{ partial "maturity.html" . }}</span>
+          {{- end }}
+          {{- with .Params.lastReviewed }}<span class="chip">{{ dateFormat "2006/01/02" . }}</span>{{ end }}
+        </span>
+      </li>
+      {{- else }}
+      <li>还没有笔记发芽。</li>
       {{- end }}
     </ul>
-    {{- else }}
-    <ul class="mini-list">
-      <li>还没有文章。</li>
-    </ul>
-    {{- end }}
   </section>
 
   <section class="block-card">
-    <h2 class="block-title">Activity</h2>
+    <h2 class="block-title">📈 生长轨迹</h2>
     {{- $counts := dict }}
     {{- range $pages }}
     {{- $key := .Date.Format "2006-01-02" }}
@@ -63,66 +76,31 @@
       <span>少</span><i></i><i></i><i class="on"></i><i class="on"></i><span>多</span>
     </div>
     <p class="heat-stats">
-      {{ len $pages }} 篇文章
-      {{- with $pages }} · 最近更新 {{ (index . 0).Date.Format "2006/01/02" }}{{ end }}
+      {{ len $pages }} 篇笔记
+      {{- with $grown }} · 最近修订 {{ dateFormat "2006/01/02" (index . 0).Params.lastReviewed }}{{ end }}
     </p>
   </section>
 </div>
 
-<div class="sort-bar" id="sort-bar">
-  <span>排序：</span>
-  <button type="button" data-sort="date" data-dir="desc" aria-pressed="true">创建时间 ↓</button>
-  <button type="button" data-sort="mod" data-dir="desc" aria-pressed="false">更新时间 ↓</button>
-  <button type="button" data-sort="title" data-dir="asc" aria-pressed="false">标题 ↑</button>
-</div>
-
-{{- if $pages }}
-<ul class="post-rows" id="post-rows">
-  {{- range first 10 $pages }}
-  <li class="row" data-date="{{ .Date.Unix }}" data-mod="{{ .Lastmod.Unix }}" data-title="{{ .Title }}">
-    <a class="row-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
-    <span class="row-date">{{ .Date.Format site.Params.DateFormat }}</span>
-  </li>
-  {{- end }}
-</ul>
+{{- with site.Params.projects }}
+<section class="block">
+  <h2 class="block-title">🛠️ 精选项目 <span class="tag">可以聊一整场面试的</span></h2>
+  <div class="sub-grid proj-grid">
+    {{- range . }}
+    <a class="sub-card proj-card" href="{{ .url | relURL }}">
+      {{- with .stack }}<span class="proj-stack">{{ . }}</span>{{ end }}
+      <h2>{{ .title }}</h2>
+      {{- with .desc }}<p>{{ . }}</p>{{ end }}
+    </a>
+    {{- end }}
+  </div>
+</section>
 {{- end }}
 
-<p class="view-all"><a href="{{ "archives/" | relURL }}">View all posts →</a></p>
-
-<script>
-(function () {
-  var list = document.getElementById('post-rows');
-  var bar = document.getElementById('sort-bar');
-  if (!list || !bar) return;
-  var rows = Array.prototype.slice.call(list.children);
-
-  bar.addEventListener('click', function (event) {
-    var button = event.target.closest('button');
-    if (!button) return;
-
-    var key = button.dataset.sort;
-    var dir = button.dataset.dir === 'desc' ? 'asc' : 'desc';
-    var arrow = dir === 'asc' ? ' ↑' : ' ↓';
-
-    Array.prototype.forEach.call(bar.querySelectorAll('button'), function (other) {
-      other.setAttribute('aria-pressed', 'false');
-    });
-    button.setAttribute('aria-pressed', 'true');
-    button.textContent = button.textContent.replace(/[↑↓]\s*$/, '') + arrow;
-
-    rows.sort(function (a, b) {
-      if (key === 'title') {
-        return dir === 'asc'
-          ? a.dataset.title.localeCompare(b.dataset.title, 'zh')
-          : b.dataset.title.localeCompare(a.dataset.title, 'zh');
-      }
-      var left = Number(a.dataset[key]);
-      var right = Number(b.dataset[key]);
-      return dir === 'asc' ? left - right : right - left;
-    });
-    rows.forEach(function (row) { list.appendChild(row); });
-  });
-})();
-</script>
+<p class="view-all">
+  <a href="{{ "notes/" | relURL }}">笔记与备考 →</a>
+  <span class="nav-sep">·</span>
+  <a href="{{ "archives/" | relURL }}">全部归档 →</a>
+</p>
 
 {{- end }}

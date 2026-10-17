@@ -1,29 +1,29 @@
 /* ============================================================
-   站点视觉：编辑器冷调（Editor Cold）
-   参考 VS Code / Tokyo Night / Linear 的质感
-   —— 深灰蓝底、克制的冷色强调、精密排版、1px 描边、微交互
-   本文件由 Hugo/PaperMod 在主题样式之后自动拼接加载
-   （resources.Match "css/extended/*.css"），因此可稳定覆盖主题默认值。
-   结构：
-     1. 设计令牌（深浅两套）
-     2. 全局基础（排版 / 链接 / 选区 / 滚动条 / 焦点环 / 环境背景）
-     3. 顶栏导航
-     4. 首页（hero / 卡片 / 热力图 / 排序 / 单行列表）
-     5. 列表页与归档页
-     6. 文章详情页（标题 / meta / 正文排版 / TOC / 代码块 / 上下篇）
-     7. Chroma 代码高亮（冷调 token 配色）
-     8. 标签页 / 搜索页 / 分页
-     9. 页脚
-    10. 响应式与无障碍
+   绔欑偣瑙嗚锛氱紪杈戝櫒鍐疯皟锛圗ditor Cold锛?
+   鍙傝€?VS Code / Tokyo Night / Linear 鐨勮川鎰?
+   鈥斺€?娣辩伆钃濆簳銆佸厠鍒剁殑鍐疯壊寮鸿皟銆佺簿瀵嗘帓鐗堛€?px 鎻忚竟銆佸井浜や簰
+   鏈枃浠剁敱 Hugo/PaperMod 鍦ㄤ富棰樻牱寮忎箣鍚庤嚜鍔ㄦ嫾鎺ュ姞杞?
+   锛坮esources.Match "css/extended/*.css"锛夛紝鍥犳鍙ǔ瀹氳鐩栦富棰橀粯璁ゅ€笺€?
+   缁撴瀯锛?
+     1. 璁捐浠ょ墝锛堟繁娴呬袱濂楋級
+     2. 鍏ㄥ眬鍩虹锛堟帓鐗?/ 閾炬帴 / 閫夊尯 / 婊氬姩鏉?/ 鐒︾偣鐜?/ 鐜鑳屾櫙锛?
+     3. 椤舵爮瀵艰埅
+     4. 棣栭〉锛坔ero / 鍗＄墖 / 鐑姏鍥?/ 鎺掑簭 / 鍗曡鍒楄〃锛?
+     5. 鍒楄〃椤典笌褰掓。椤?
+     6. 鏂囩珷璇︽儏椤碉紙鏍囬 / meta / 姝ｆ枃鎺掔増 / TOC / 浠ｇ爜鍧?/ 涓婁笅绡囷級
+     7. Chroma 浠ｇ爜楂樹寒锛堝喎璋?token 閰嶈壊锛?
+     8. 鏍囩椤?/ 鎼滅储椤?/ 鍒嗛〉
+     9. 椤佃剼
+    10. 鍝嶅簲寮忎笌鏃犻殰纰?
    ============================================================ */
 
 /* ============================================================
-   1. 设计令牌
+   1. 璁捐浠ょ墝
    ============================================================ */
 
 :root,
 :root[data-theme="dark"] {
-    /* 色板：极深灰蓝 */
+    /* 鑹叉澘锛氭瀬娣辩伆钃?*/
     --theme: #0b0e14;
     --entry: #11151d;
     --border: #1e2430;
@@ -34,18 +34,18 @@
     --code-block-bg: #0f131a;
     --code-bg: #0f131a;
 
-    /* 冷色强调（Tokyo Night） */
+    /* 鍐疯壊寮鸿皟锛圱okyo Night锛?*/
     --accent: #7aa2f7;
     --accent-2: #bb9af7;
     --accent-3: #7dcfff;
     --accent-soft: rgba(122, 162, 247, .12);
     --accent-line: rgba(122, 162, 247, .38);
 
-    /* 环境背景（极其克制） */
+    /* 鐜鑳屾櫙锛堟瀬鍏跺厠鍒讹級 */
     --ambient-glow: rgba(122, 162, 247, .10);
     --ambient-dot: rgba(230, 237, 246, .030);
 
-    /* 代码 token（冷调深色） */
+    /* 浠ｇ爜 token锛堝喎璋冩繁鑹诧級 */
     --c-fg: #c0caf5;
     --c-comment: #565f89;
     --c-keyword: #bb9af7;
@@ -103,13 +103,13 @@
 }
 
 :root {
-    /* 字体：全部使用系统字体栈，不引入任何外部 CDN 字体 */
+    /* 瀛椾綋锛氬叏閮ㄤ娇鐢ㄧ郴缁熷瓧浣撴爤锛屼笉寮曞叆浠讳綍澶栭儴 CDN 瀛椾綋 */
     --font-sans: system-ui, -apple-system, "Segoe UI", "PingFang SC",
         "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
     --font-mono: "JetBrains Mono", "Cascadia Code", "SF Mono", ui-monospace,
         Menlo, Consolas, "Liberation Mono", monospace;
 
-    /* 间距 / 圆角 / 动效 */
+    /* 闂磋窛 / 鍦嗚 / 鍔ㄦ晥 */
     --radius-sm: 6px;
     --radius-md: 10px;
     --radius-pill: 999px;
@@ -120,10 +120,10 @@
 }
 
 /* ============================================================
-   2. 全局基础
+   2. 鍏ㄥ眬鍩虹
    ============================================================ */
 
-/* 页面底色 + 极克制的环境背景（径向微光 + 细密点阵），纯 CSS，无外部图片 */
+/* 椤甸潰搴曡壊 + 鏋佸厠鍒剁殑鐜鑳屾櫙锛堝緞鍚戝井鍏?+ 缁嗗瘑鐐归樀锛夛紝绾?CSS锛屾棤澶栭儴鍥剧墖 */
 html {
     background-color: var(--theme);
     background-image:
@@ -140,7 +140,7 @@ body,
 body.list,
 :root[data-theme] body,
 :root[data-theme] body.list {
-    /* 让 html 上的环境背景透出，并统一列表页底色 */
+    /* 璁?html 涓婄殑鐜鑳屾櫙閫忓嚭锛屽苟缁熶竴鍒楄〃椤靛簳鑹?*/
     background: transparent;
 }
 
@@ -155,7 +155,7 @@ body {
     font-variant-numeric: tabular-nums;
 }
 
-/* 标题：精密负字距 */
+/* 鏍囬锛氱簿瀵嗚礋瀛楄窛 */
 h1,
 h2,
 h3,
@@ -176,14 +176,14 @@ a {
     color: var(--primary);
 }
 
-/* 焦点环：保证可访问性，统一使用强调色 */
+/* 鐒︾偣鐜細淇濊瘉鍙闂€э紝缁熶竴浣跨敤寮鸿皟鑹?*/
 :where(a, button, input, textarea, summary, [tabindex]):focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
     border-radius: var(--radius-sm);
 }
 
-/* 自定义滚动条 */
+/* 鑷畾涔夋粴鍔ㄦ潯 */
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -203,13 +203,13 @@ a {
     background: var(--secondary);
 }
 
-/* 正文容器：克制的留白与滚动呼吸感 */
+/* 姝ｆ枃瀹瑰櫒锛氬厠鍒剁殑鐣欑櫧涓庢粴鍔ㄥ懠鍚告劅 */
 .main {
     padding: 28px var(--gap) 56px;
 }
 
 /* ============================================================
-   3. 顶栏导航
+   3. 椤舵爮瀵艰埅
    ============================================================ */
 
 .header {
@@ -217,7 +217,7 @@ a {
     top: 0;
     z-index: 30;
     background: var(--theme);
-    /* 半透明 + 轻微模糊：Linear / VS Code 质感 */
+    /* 鍗婇€忔槑 + 杞诲井妯＄硦锛歀inear / VS Code 璐ㄦ劅 */
     background: color-mix(in srgb, var(--theme) 82%, transparent);
     -webkit-backdrop-filter: saturate(140%) blur(10px);
     backdrop-filter: saturate(140%) blur(10px);
@@ -237,7 +237,7 @@ a {
     transition: color var(--dur) var(--ease);
 }
 
-/* 品牌标记：一个小方块，冷调渐变 */
+/* 鍝佺墝鏍囪锛氫竴涓皬鏂瑰潡锛屽喎璋冩笎鍙?*/
 .logo a::before {
     content: "";
     flex: 0 0 auto;
@@ -251,7 +251,7 @@ a {
     color: var(--accent);
 }
 
-/* 导航项：等宽小字号 */
+/* 瀵艰埅椤癸細绛夊灏忓瓧鍙?*/
 #menu a {
     color: var(--secondary);
     font-family: var(--font-mono);
@@ -264,7 +264,7 @@ a {
     color: var(--primary);
 }
 
-/* 当前项高亮 */
+/* 褰撳墠椤归珮浜?*/
 #menu .active {
     color: var(--accent);
     font-weight: 500;
@@ -295,7 +295,7 @@ a {
 }
 
 /* ============================================================
-   4. 首页
+   4. 棣栭〉
    ============================================================ */
 
 .home-hero {
@@ -369,7 +369,7 @@ a {
     color: var(--accent);
 }
 
-/* 区块 / 卡片 */
+/* 鍖哄潡 / 鍗＄墖 */
 .block {
     margin-bottom: 28px;
     padding-top: 14px;
@@ -437,7 +437,7 @@ a {
 }
 
 .mini-list li::before {
-    content: "·";
+    content: "路";
     position: absolute;
     left: 0;
     color: var(--accent);
@@ -451,7 +451,7 @@ a {
     color: var(--accent);
 }
 
-/* 活跃度热力图 */
+/* 娲昏穬搴︾儹鍔涘浘 */
 .heat {
     display: grid;
     grid-template-rows: repeat(7, 9px);
@@ -504,7 +504,7 @@ a {
     color: var(--secondary);
 }
 
-/* 排序控件 */
+/* 鎺掑簭鎺т欢 */
 .sort-bar {
     display: flex;
     flex-wrap: wrap;
@@ -534,7 +534,7 @@ a {
     color: var(--accent);
 }
 
-/* 单行列表（首页） */
+/* 鍗曡鍒楄〃锛堥椤碉級 */
 .post-rows {
     margin: 0;
     padding: 0;
@@ -609,7 +609,7 @@ a {
 }
 
 /* ============================================================
-   5. 列表页与归档页：单行列表
+   5. 鍒楄〃椤典笌褰掓。椤碉細鍗曡鍒楄〃
    ============================================================ */
 
 .post-entry {
@@ -694,7 +694,7 @@ a {
     display: block;
 }
 
-/* 列表页头部 */
+/* 鍒楄〃椤靛ご閮?*/
 .page-header {
     margin: 12px auto var(--content-gap) auto;
 }
@@ -718,7 +718,7 @@ a {
     line-height: 1.7;
 }
 
-/* 归档页 */
+/* 褰掓。椤?*/
 .archive-year {
     margin-top: 34px;
 }
@@ -790,14 +790,14 @@ a {
 }
 
 /* ============================================================
-   6. 文章详情页
+   6. 鏂囩珷璇︽儏椤?
    ============================================================ */
 
 .post-header {
     margin: 20px auto var(--content-gap) auto;
 }
 
-/* 面包屑 */
+/* 闈㈠寘灞?*/
 .breadcrumbs {
     gap: .35rem;
     margin-bottom: 14px;
@@ -822,7 +822,7 @@ a {
     opacity: .55;
 }
 
-/* 标题与 meta */
+/* 鏍囬涓?meta */
 .post-title {
     font-size: clamp(30px, 5vw, 40px);
     font-weight: 700;
@@ -851,7 +851,7 @@ a {
     border-bottom-color: var(--accent-line);
 }
 
-/* 正文排版 */
+/* 姝ｆ枃鎺掔増 */
 .post-content {
     color: var(--content);
     font-size: 17px;
@@ -888,7 +888,7 @@ a {
     margin-top: .4em;
 }
 
-/* 标题锚点 */
+/* 鏍囬閿氱偣 */
 .anchor {
     color: var(--secondary);
     font-weight: 400;
@@ -906,7 +906,7 @@ a {
     color: var(--accent) !important;
 }
 
-/* 正文链接：底边线而非默认下划线 */
+/* 姝ｆ枃閾炬帴锛氬簳杈圭嚎鑰岄潪榛樿涓嬪垝绾?*/
 .md-content a:not(.anchor) {
     color: var(--accent);
     text-decoration: none;
@@ -918,7 +918,7 @@ a {
     border-bottom-color: var(--accent);
 }
 
-/* 列表 */
+/* 鍒楄〃 */
 .md-content li {
     margin-top: .35rem;
 }
@@ -927,7 +927,7 @@ a {
     color: var(--accent);
 }
 
-/* 引用块 */
+/* 寮曠敤鍧?*/
 .md-content blockquote {
     margin: 1.4em 0;
     padding: .35em 1.1em;
@@ -941,7 +941,7 @@ a {
     margin-bottom: 0;
 }
 
-/* 行内代码 */
+/* 琛屽唴浠ｇ爜 */
 .md-content :not(pre) > code {
     padding: .15em .42em;
     font-family: var(--font-mono);
@@ -953,7 +953,7 @@ a {
     border-radius: var(--radius-sm);
 }
 
-/* 表格：独立横向滚动容器，避免在窄屏撑破版面 */
+/* 琛ㄦ牸锛氱嫭绔嬫í鍚戞粴鍔ㄥ鍣紝閬垮厤鍦ㄧ獎灞忔拺鐮寸増闈?*/
 .md-content table:not(.highlighttable):not(.lntable):not(.highlight table) {
     display: block;
     width: max-content;
@@ -975,7 +975,7 @@ a {
     background: color-mix(in srgb, var(--entry) 65%, transparent);
 }
 
-/* 图片 */
+/* 鍥剧墖 */
 .md-content img {
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -989,7 +989,7 @@ a {
     font-weight: 400;
 }
 
-/* 分隔线 */
+/* 鍒嗛殧绾?*/
 .md-content hr {
     height: 1px;
     margin: 2.4em 0;
@@ -997,7 +997,7 @@ a {
     border: 0;
 }
 
-/* 高亮 */
+/* 楂樹寒 */
 mark {
     padding: 0 .2em;
     border-radius: var(--radius-sm);
@@ -1005,7 +1005,7 @@ mark {
     color: var(--primary);
 }
 
-/* ---- TOC 目录 ---- */
+/* ---- TOC 鐩綍 ---- */
 details.toc {
     background: var(--entry);
     border: 1px solid var(--border);
@@ -1072,13 +1072,13 @@ details.toc .inner a:hover {
     text-decoration: none;
 }
 
-/* 当前滚动到的目录项（由 extend_footer 的 scrollspy 脚本添加） */
+/* 褰撳墠婊氬姩鍒扮殑鐩綍椤癸紙鐢?extend_footer 鐨?scrollspy 鑴氭湰娣诲姞锛?*/
 details.toc .inner a.active {
     color: var(--accent);
     background: var(--accent-soft);
 }
 
-/* ---- 代码块容器 ---- */
+/* ---- 浠ｇ爜鍧楀鍣?---- */
 .md-content .highlight {
     position: relative;
     margin-bottom: var(--content-gap);
@@ -1096,8 +1096,8 @@ details.toc .inner a.active {
     direction: ltr;
 }
 
-/* 抵消主题 chroma-mod.css 给 .cl 追加的水平内边距，
-   改由 .highlight 容器统一提供 padding，避免双重缩进 */
+/* 鎶垫秷涓婚 chroma-mod.css 缁?.cl 杩藉姞鐨勬按骞冲唴杈硅窛锛?
+   鏀圭敱 .highlight 瀹瑰櫒缁熶竴鎻愪緵 padding锛岄伩鍏嶅弻閲嶇缉杩?*/
 .md-content .highlight pre.chroma .line .cl {
     padding: 0;
 }
@@ -1115,7 +1115,7 @@ details.toc .inner a.active {
     word-break: normal;
 }
 
-/* 无高亮的裸 pre（极少见，兜底） */
+/* 鏃犻珮浜殑瑁?pre锛堟瀬灏戣锛屽厹搴曪級 */
 .md-content > pre,
 .md-content pre:not(.chroma) {
     margin-bottom: var(--content-gap);
@@ -1129,7 +1129,7 @@ details.toc .inner a.active {
     overflow-x: auto;
 }
 
-/* 行号（若启用） */
+/* 琛屽彿锛堣嫢鍚敤锛?*/
 .chroma .lntd,
 .chroma .lntd pre {
     border: 0;
@@ -1142,7 +1142,7 @@ details.toc .inner a.active {
     font-family: var(--font-mono);
 }
 
-/* 复制按钮 */
+/* 澶嶅埗鎸夐挳 */
 .copy-code {
     position: absolute;
     top: 8px;
@@ -1167,7 +1167,7 @@ details.toc .inner a.active {
     border-color: var(--accent-line);
 }
 
-/* ---- 文章底部标签 / 上下篇 ---- */
+/* ---- 鏂囩珷搴曢儴鏍囩 / 涓婁笅绡?---- */
 .post-tags {
     gap: 8px;
 }
@@ -1228,9 +1228,9 @@ details.toc .inner a.active {
 }
 
 /* ============================================================
-   7. Chroma 代码高亮：冷调 token 配色
-   （chroma-styles.css 在 core 中先加载，本文件在其后，
-     同特异性选择器后者生效；token 颜色用变量以适配深浅两套）
+   7. Chroma 浠ｇ爜楂樹寒锛氬喎璋?token 閰嶈壊
+   锛坈hroma-styles.css 鍦?core 涓厛鍔犺浇锛屾湰鏂囦欢鍦ㄥ叾鍚庯紝
+     鍚岀壒寮傛€ч€夋嫨鍣ㄥ悗鑰呯敓鏁堬紱token 棰滆壊鐢ㄥ彉閲忎互閫傞厤娣辨祬涓ゅ锛?
    ============================================================ */
 
 .chroma {
@@ -1372,10 +1372,10 @@ details.toc .inner a.active {
 }
 
 /* ============================================================
-   8. 标签页 / 搜索页 / 分页
+   8. 鏍囩椤?/ 鎼滅储椤?/ 鍒嗛〉
    ============================================================ */
 
-/* 标签（terms）页 */
+/* 鏍囩锛坱erms锛夐〉 */
 .terms-tags {
     gap: .7em;
     margin-top: var(--content-gap);
@@ -1400,7 +1400,7 @@ details.toc .inner a.active {
     transform: translateY(-1px);
 }
 
-/* 搜索页 */
+/* 鎼滅储椤?*/
 .searchbox input {
     padding: 10px 14px;
     width: 100%;
@@ -1437,7 +1437,7 @@ details.toc .inner a.active {
     border-color: var(--accent-line);
 }
 
-/* 分页 */
+/* 鍒嗛〉 */
 .page-footer {
     margin-top: 30px;
 }
@@ -1461,7 +1461,7 @@ details.toc .inner a.active {
 }
 
 /* ============================================================
-   9. 页脚
+   9. 椤佃剼
    ============================================================ */
 
 .footer {
@@ -1487,7 +1487,7 @@ details.toc .inner a.active {
     border-bottom-color: var(--accent-line);
 }
 
-/* 返回顶部 */
+/* 杩斿洖椤堕儴 */
 .top-link {
     display: inline-flex;
     align-items: center;
@@ -1524,7 +1524,7 @@ details.toc .inner a.active {
 }
 
 /* ============================================================
-   10. 响应式
+   10. 鍝嶅簲寮?
    ============================================================ */
 
 @media (max-width: 720px) {
@@ -1622,7 +1622,7 @@ details.toc .inner a.active {
 }
 
 /* ============================================================
-   无障碍：尊重系统的「减弱动态效果」
+   鏃犻殰纰嶏細灏婇噸绯荤粺鐨勩€屽噺寮卞姩鎬佹晥鏋溿€?
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1655,7 +1655,7 @@ details.toc .inner a.active {
 }
 
 /* ============================================================
-   11. 栏目页（子板块卡片 + 空态）
+   11. 鏍忕洰椤碉紙瀛愭澘鍧楀崱鐗?+ 绌烘€侊級
    ============================================================ */
 
 .section-head {
@@ -1747,5 +1747,302 @@ details.toc .inner a.active {
 @media (max-width: 640px) {
     .sub-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+
+/* ============================================================
+   12. 数字花园（首页分区 / 侧边知识树 / 成熟度 / 反向链接 / Mermaid）
+   ============================================================ */
+
+.home-hero .hero-tagline {
+    margin: 14px 0 0;
+    font-size: 13.5px;
+    letter-spacing: .02em;
+    color: var(--secondary);
+}
+
+/* 成熟度徽标与元信息 chip */
+.maturity,
+.chip {
+    display: inline-block;
+    margin: 0 6px 0 0;
+    padding: 1px 7px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .02em;
+    color: var(--secondary);
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.maturity.m-budding {
+    border-color: var(--accent-line);
+    color: var(--accent);
+}
+
+.maturity.m-evergreen {
+    border-color: rgba(158, 206, 106, .38);
+    color: #9ece6a;
+}
+
+.grow-bar {
+    margin: 14px 0 0;
+}
+
+/* 首页：知识分区卡片 */
+.zone-card {
+    position: relative;
+    padding-top: 18px;
+}
+
+.zone-glyph {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.proj-card {
+    padding-top: 18px;
+}
+
+.proj-stack {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.grow-list .grow-item {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 6px 0;
+}
+
+.grow-list .grow-item a {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--content);
+    transition: color var(--dur) var(--ease);
+}
+
+.grow-list .grow-item a:hover {
+    color: var(--accent);
+}
+
+.grow-meta {
+    flex: none;
+}
+
+.grow-meta .chip {
+    margin-right: 0;
+}
+
+/* 文章页：左侧知识树 */
+.garden {
+    display: grid;
+    grid-template-columns: 232px minmax(0, 1fr);
+    gap: 34px;
+    align-items: start;
+}
+
+.garden-side {
+    position: sticky;
+    top: 82px;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 4px;
+}
+
+.garden-side::-webkit-scrollbar {
+    width: 4px;
+}
+
+.garden-side-root {
+    display: block;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: .01em;
+    color: var(--primary);
+    transition: color var(--dur) var(--ease);
+}
+
+.garden-side-root:hover {
+    color: var(--accent);
+}
+
+.garden-group {
+    margin-bottom: 12px;
+}
+
+.garden-group > summary {
+    cursor: pointer;
+    padding: 4px 0;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    list-style: none;
+    transition: color var(--dur) var(--ease);
+}
+
+.garden-group > summary::before {
+    content: "▸ ";
+    color: var(--tertiary);
+}
+
+.garden-group[open] > summary::before {
+    content: "▾ ";
+}
+
+.garden-group > summary:hover {
+    color: var(--accent);
+}
+
+.garden-list {
+    margin: 4px 0 0;
+    padding: 0 0 0 12px;
+    list-style: none;
+    border-left: 1px solid var(--border);
+}
+
+.garden-list li {
+    padding: 2px 0;
+}
+
+.garden-list a {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--secondary);
+    transition: color var(--dur) var(--ease);
+}
+
+.garden-list a:hover {
+    color: var(--primary);
+}
+
+.garden-list .is-current {
+    position: relative;
+}
+
+.garden-list .is-current::before {
+    content: "";
+    position: absolute;
+    left: -13px;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: translateY(-50%);
+}
+
+.garden-list .is-current a {
+    color: var(--accent);
+}
+
+/* 反向链接 */
+.backlinks {
+    margin: 34px 0 0;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--entry);
+}
+
+.backlinks-title {
+    margin: 0 0 10px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--secondary);
+}
+
+.backlinks-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.backlinks-list li {
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.backlinks-list li:last-child {
+    border-bottom: 0;
+}
+
+.backlinks-list a {
+    font-size: 14px;
+    color: var(--content);
+    transition: color var(--dur) var(--ease);
+}
+
+.backlinks-list a:hover {
+    color: var(--accent);
+}
+
+/* Mermaid：由 JS 注入的 div.mermaid，渲染前的占位也要可读 */
+.mermaid {
+    margin: 18px 0;
+    text-align: center;
+    overflow-x: auto;
+}
+
+.mermaid pre {
+    margin: 0;
+    text-align: left;
+}
+
+/* 窄屏：知识树移到正文上方并默认折叠 */
+@media (max-width: 1080px) {
+    .garden {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .garden-side {
+        position: static;
+        max-height: none;
+        padding: 14px 16px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        background: var(--entry);
+    }
+
+    .garden-group[open] > summary::before {
+        content: "▸ ";
+    }
+
+    .garden-group {
+        display: none;
+    }
+
+    .garden-group .is-current,
+    .garden-group:has(.is-current) {
+        display: block;
+    }
+
+    .garden-group:has(.is-current) > summary {
+        color: var(--accent);
     }
 }

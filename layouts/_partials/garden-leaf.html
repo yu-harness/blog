@@ -1,0 +1,6 @@
+{{- /* 侧边知识树的叶子节点：当前页加 .is-current。 */ -}}
+{{- $ctx := .ctx -}}
+{{- $cur := .current -}}
+<li{{ if eq $ctx.RelPermalink $cur.RelPermalink }} class="is-current"{{ end }}>
+  <a href="{{ $ctx.RelPermalink }}">{{ $ctx.Title }}</a>
+</li>

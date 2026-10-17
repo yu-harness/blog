@@ -9,10 +9,21 @@ theme: "PaperMod"
 pagination:
   pagerSize: 10
 
-# 首页显示哪些栏目的文章（顺序就是显示顺序）
+# 数字花园的两个维度：
+#   tags   —— 横向的话题（如 工具调用 / 上下文窗口）
+#   series —— 纵向的系列弧（如 LLM 基础 01/02/03）
+taxonomies:
+  tag: tags
+  series: series
+
+# 首页模块卡片的顺序（同时也是承认的知识分区）
 mainSections:
+  - agent
+  - rag
   - llm
-  - tools
+  - production
+  - backend
+  - builds
   - notes
 
 # 让搜索能用：首页额外生成一份 index.json，搜索页读它
@@ -44,7 +55,7 @@ markup:
 
 params:
   env: production
-  description: "赵宇的大模型工程笔记：LLM 原理与边界、RAG、Agent 与工具链，每篇都有实测数字。"
+  description: "yu-harness 的 Agent Harness 工程笔记：Agent 架构、RAG 与记忆、生产级落地、后端基石。每篇尽量给出能复现的数字。"
   DateFormat: "2006/01/02"
 
   # 站点图标与浏览器主题色
@@ -67,11 +78,55 @@ params:
   ShowToc: true
   TocOpen: false
 
-  # 首页顶部
+  # 首页顶部（Hero 品牌区）
   hero:
-    subtitle: "LLM · RAG · AGENT · INFERENCE"
+    subtitle: "Models provide the intelligence; I build the Harness."
+    tagline: "yu-harness ｜ Agent Harness Engineering · RAG · Memory · 生产级落地"
     epigraph: "核心理想：让 21 世纪不再有贫困——金钱退场，资源流动。"
     motto: "终极目标：带领人类逃离银河系。"
+
+  # 首页的知识分区入口卡片（顺序即呈现顺序）
+  # 增改 zones 时同步维护 content/ 下的目录与 menu.main
+  garden_modules:
+    - title: "Agent 架构"
+      url: "/agent/"
+      glyph: "🤖"
+      desc: "执行模式、工具调用、MCP、多智能体编排与 Harness 运行时。"
+    - title: "RAG & Memory"
+      url: "/rag/"
+      glyph: "🧠"
+      desc: "检索管线、上下文工程、记忆系统。"
+    - title: "LLM 基础"
+      url: "/llm/"
+      glyph: "📐"
+      desc: "Transformer 与 token、对齐与幻觉、后训练。"
+    - title: "生产级落地"
+      url: "/production/"
+      glyph: "⚙️"
+      desc: "可观测性、评测、推理部署、延迟与成本。"
+    - title: "后端基石"
+      url: "/backend/"
+      glyph: "🔥"
+      desc: "Redis 高可用、并发与锁、存储选型。"
+    - title: "笔记与备考"
+      url: "/notes/"
+      glyph: "📝"
+      desc: "面试题、读书与论文笔记、个人观点。"
+
+  # 精选项目（首页下半区）
+  projects:
+    - title: "Pico"
+      url: "/builds/pico/"
+      stack: "Agent Harness"
+      desc: "本地代码智能体：五层运行时、上下文预算裁剪、结构化记忆与 checkpoint 恢复。"
+    - title: "Medical Agent"
+      url: "/builds/medical-agent/"
+      stack: "Skills-Agent"
+      desc: "两层架构 + Swarm 协作 + 双层记忆，自建 500 条评测集。"
+    - title: "RAG KB"
+      url: "/builds/rag-kb/"
+      stack: "FastAPI · Chroma"
+      desc: "知识库问答系统：切分、检索链路与评测拆解。"
 
   # 侧边和底部的图标，有了账号再取消注释
   # socialIcons:
@@ -80,32 +135,48 @@ params:
 
 menu:
   main:
-    - identifier: llm
-      name: 大模型
-      url: /llm/
+    - identifier: agent
+      name: Agent 架构
+      url: /agent/
       weight: 10
-    - identifier: tools
-      name: 工具链
-      url: /tools/
+    - identifier: rag
+      name: RAG & Memory
+      url: /rag/
       weight: 20
-    - identifier: notes
-      name: 观点与笔记
-      url: /notes/
+    - identifier: llm
+      name: LLM 基础
+      url: /llm/
       weight: 30
-    - identifier: about
-      name: 关于
-      url: /about/
+    - identifier: production
+      name: 生产级落地
+      url: /production/
       weight: 40
+    - identifier: backend
+      name: 后端基石
+      url: /backend/
+      weight: 50
+    - identifier: builds
+      name: 项目拆解
+      url: /builds/
+      weight: 60
     - identifier: search
       name: 搜索
       url: /search/
-      weight: 50
+      weight: 70
   footer:
+    - identifier: notes
+      name: 笔记与备考
+      url: /notes/
+      weight: 10
+    - identifier: about
+      name: 关于
+      url: /about/
+      weight: 20
     - identifier: tags
       name: 标签
       url: /tags/
-      weight: 10
+      weight: 30
     - identifier: archives
       name: 归档
       url: /archives/
-      weight: 20
+      weight: 40
