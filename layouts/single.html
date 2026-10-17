@@ -89,7 +89,12 @@
       {{- if (.Param "ShowPostNavLinks") }}{{ partial "post_nav_links.html" . }}{{ end }}
     </footer>
 
-    {{ partial "backlinks.html" . }}
+    {{- /* extend_footer 已由 baseof 的 footer.html 链路渲染（含 KaTeX / TOC）；
+            这里只额外注入 Mermaid——它的渲染条件依赖 .Content，
+            而 footer.html 走 partialCached，缓存会把条件判断冻在首次渲染的结果上。 */ -}}
+    {{- partial "mermaid_footer.html" . }}
+
+    {{- partial "backlinks.html" . }}
   </article>
 </div>
 
