@@ -18,11 +18,11 @@
       </ul>
       {{- end }}
 
-      {{- range $sec.Sections.ByTitle }}
+      {{- range $sec.Sections.ByWeight }}
       <details class="garden-group" open>
         <summary>{{ .Title }}</summary>
         <ul class="garden-list">
-          {{- range sort .RegularPagesRecursive "Params.series_order" "Title" }}
+          {{- range sort .RegularPagesRecursive "Params.series_order" "asc" }}
           {{- partial "garden-leaf.html" (dict "ctx" . "current" $) }}
           {{- end }}
         </ul>
