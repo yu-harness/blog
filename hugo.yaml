@@ -116,13 +116,13 @@ params:
   # 精选项目（首页下半区）
   projects:
     - title: "Pico"
-      url: "/builds/pico/"
+      url: "/builds/pico/pico-coding-agent-harness/"
       stack: "Agent Harness"
-      desc: "本地代码智能体：五层运行时、上下文预算裁剪、结构化记忆与 checkpoint 恢复。"
+      desc: "本地代码智能体：单主循环、六段提示词预算裁剪、Prefix Cache 对齐、七工具受控执行链。"
     - title: "Medical Agent"
-      url: "/builds/medical-agent/"
-      stack: "Skills-Agent"
-      desc: "两层架构 + Swarm 协作 + 双层记忆，自建 500 条评测集。"
+      url: "/builds/medical-agent/medical-skills-agent-architecture/"
+      stack: "Router + Skills"
+      desc: "两层架构：意图路由与槽位填充 + 声明式 Skill 状态机，混合检索与证据强制绑定。"
     - title: "RAG KB"
       url: "/builds/rag-kb/"
       stack: "FastAPI · Chroma"
